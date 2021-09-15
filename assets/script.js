@@ -20,14 +20,77 @@ function generatePassword() {
   }
   else {
     // ------- prompt pw requirements -------- //
-    var lowercaseConfirm = confirm("Will this password contain lowercase characters?");
-    var uppercaseConfirm = confirm("Will this password contain uppercase characters?");
-    var numberConfirm = confirm("Will this password contain numbers (0-9)?");
-    var SpecialCharConfirm = confirm("Will this password contain special characters?");
-    
+    lowercaseConfirm = confirm("Will this password contain lowercase characters? Select 'Ok' for 'Yes' and 'Cancel' for 'No' ");
+    uppercaseConfirm = confirm("Will this password contain uppercase characters? Select 'Ok' for 'Yes' and 'Cancel' for 'No' ");
+    numberConfirm = confirm("Will this password contain numbers (0-9)? Select 'Ok' for 'Yes' and 'Cancel' for 'No' ");
+    SpecialCharConfirm = confirm("Will this password contain special characters? Select 'Ok' for 'Yes' and 'Cancel' for 'No' ");
   };
 
-// ------- generate password -------- //
+  if (!lowercaseConfirm && !uppercaseConfirm && !numberConfirm && !SpecialCharConfirm) {
+    criterias = alert("Please select your password requirements again");
+
+    //if all criterias were confirmed
+  } else if (lowercaseConfirm && uppercaseConfirm && numberConfirm && SpecialCharConfirm) {
+    criterias = lowercaseChar.concat(uppercaseChar, specialChar, numChar);
+
+    //if 3 critieras confirmed
+  } else if (lowercaseConfirm && uppercaseConfirm && numberConfirm && !SpecialCharConfirm) {
+    criterias = lowercaseChar.concat(uppercaseChar, numChar);
+
+  } else if (lowercaseConfirm && uppercaseConfirm && !numberConfirm && SpecialCharConfirm) {
+    criterias = lowercaseChar.concat(uppercaseChar, specialChar);
+
+  } else if (lowercaseConfirm && !uppercaseConfirm && numberConfirm && SpecialCharConfirm) {
+    criterias = lowercaseChar.concat(numChar, specialChar);
+
+  } else if (!lowercaseConfirm && uppercaseConfirm && numberConfirm && SpecialCharConfirm) {
+    criterias = uppercaseChar.concat(numChar, specialChar);
+  
+  //if 2 critieras confirmed
+  } else if (lowercaseConfirm && uppercaseConfirm && !numberConfirm && !SpecialCharConfirm) {
+    criterias = lowercaseChar.concat(uppercaseChar);
+
+  } else if (lowercaseConfirm && !uppercaseConfirm && numberConfirm && !SpecialCharConfirm) {
+    criterias = lowercaseChar.concat(numChar);
+
+  } else if (!lowercaseConfirm && uppercaseConfirm && numberConfirm && !SpecialCharConfirm) {
+    criterias = uppercaseChar.concat(numChar);
+
+  } else if (!lowercaseConfirm && !uppercaseConfirm && numberConfirm && SpecialCharConfirm) {
+    criterias = numChar.concat(specialChar);
+
+  } else if (!lowercaseConfirm && uppercaseConfirm && !numberConfirm && SpecialCharConfirm) {
+    criterias = uppercaseChar.concat(specialChar);
+
+  } else if (lowercaseConfirm && !uppercaseConfirm && !numberConfirm && SpecialCharConfirm) {
+    criterias = lowercaseChar.concat(specialChar);
+
+    //if 1 critieras confirmed
+  } else if (lowercaseConfirm && !uppercaseConfirm && !numberConfirm && !SpecialCharConfirm) {
+    criterias = lowercaseChar;
+
+  }  else if (!lowercaseConfirm && uppercaseConfirm && !numberConfirm && !SpecialCharConfirm) {
+    criterias = uppercaseChar;
+
+  }  else if (!lowercaseConfirm && !uppercaseConfirm && numberConfirm && !SpecialCharConfirm) {
+    criterias = numChar;
+
+  }  else if (!lowercaseConfirm && !uppercaseConfirm && !numberConfirm && SpecialCharConfirm) {
+    criterias = specialChar;
+  };
+
+  // ------- generate password -------- //
+  var generatedPassword = [];
+
+  for (var i = 0; i < pwLength; i++) {
+    var selectedCriterias = criterias[Math.floor(Math.random() * criterias.length)];
+    generatedPassword.push(selectedCriterias);
+  }
+  console.log(generatedPassword);
+
+  //convert array to string and return value
+  return generatedPassword.join("");
+}
 
 
 
