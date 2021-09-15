@@ -39,11 +39,30 @@ function generatePassword() {
   } 
   else if (uppercaseConfirm === 'Y') {
     i++
+  };
+
+  // number prompt
+  var numberConfirm = window.prompt("Should the password contain numbers (0-9)? Type 'Y' for yes or 'N' for no").toUpperCase();
+  if (!numberConfirm === 'Y' || !numberConfirm === 'N') {
+    numberConfirm = window.prompt("Invalid input. Should the password contain contain numbers (0-9)? Type 'Y' for yes or 'N' for no").toUpperCase();
   } 
+  else if (numberConfirm === 'Y') {
+    i++
+  };
+
+  // special character prompt
+  var specialCharConfirm = window.prompt("Should the password contain special characters? Type 'Y' for yes or 'N' for no").toUpperCase();
+  if (!specialCharConfirm === 'Y' || !specialCharConfirm === 'N') {
+    specialCharConfirm = window.prompt("Invalid input. Should the password contain special characters (0-9)? Type 'Y' for yes or 'N' for no").toUpperCase();
+  } 
+  else if (specialCharConfirm === 'Y') {
+    i++
+  }
 };
 
 
-}
+
+
 
 // Write password to the #password input
 function writePassword() {
